@@ -1,3 +1,4 @@
+Markdown
 <div align="center">
 
 # 🎮 AQ GAME REBORN 🎮
@@ -28,4 +29,71 @@
 * **Financial Analytics & Revenue**: Real-time net revenue tracking and earnings summary.
 * **Dynamic Billing & Console Control**: Seamlessly add, update, or remove PS units and hourly pricing rates directly from the database.
 * **Walk-In POS (Cashier Mode)**: Instantly log physical walk-in customers on the spot, locking time slots in real-time without scheduling conflicts.
-* **User
+* **User & Booking Management**: Complete user privilege control (promote/demote roles, delete accounts) and flexible booking schedule editing.
+* **Thermal Receipt Printing**: Instant thermal printer-ready invoice generation for physical or digital distribution.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend**: React.js, Vite, Tailwind CSS, Lucide Icons, Axios, React Router DOM.
+* **Backend**: Node.js, Express.js, RESTful API architecture.
+* **Database**: MongoDB & Mongoose ODM.
+* **File Upload**: Multer (secure payment proof management).
+* **Authentication**: JSON Web Token (JWT) & bcryptjs.
+
+---
+
+## 📂 Project Directory Structure
+
+```text
+aq-game-reborn/
+├── backend/
+│   ├── config/          # Database connection configuration
+│   ├── controllers/     # Business logic (Auth, Console, Booking, User)
+│   ├── middleware/      # JWT authentication & Multer upload middleware
+│   ├── models/          # Mongoose database schemas (User, PSConsole, Booking)
+│   ├── routes/          # API endpoint routers
+│   ├── uploads/         # Storage directory for payment transfer proofs
+│   └── server.js        # Express application entry point
+│
+└── frontend/
+    ├── src/
+    │   ├── components/  # Reusable UI components (Navbar, etc.)
+    │   ├── pages/       # Core views (Home, Login, Register, Admin, MyBookings)
+    │   ├── services/    # Axios API service configurations
+    │   ├── App.jsx      # Main application routing
+    │   └── main.css     # Tailwind CSS styling setup
+    └── package.json
+🚀 Installation & Local Setup
+Ensure you have Node.js and MongoDB installed on your machine.
+
+1. Clone the Repository & Navigate
+Bash
+git clone [https://github.com/USERNAME_KAMU/aq-game-reborn.git](https://github.com/USERNAME_KAMU/aq-game-reborn.git)
+cd aq-game-reborn
+2. Run the Backend Server
+Bash
+cd backend
+npm install
+Create a .env file inside the backend folder:
+
+Cuplikan kode
+PORT=5000
+MONGO_URI=mongodb://127.0.0.1:27017/aq_game_reborn
+JWT_SECRET=aqgamereborn_super_secret_key_2026
+Start the backend development server:
+
+Bash
+npm run dev
+3. Run the Frontend Client
+Open a new terminal window and navigate to the frontend folder:
+
+Bash
+cd frontend
+npm install
+npm run dev
+Access the application in your browser at http://localhost:5173.
+
+👥 Author & Creator
+Rudi Asman Salim - Full-Stack Developer
