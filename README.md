@@ -11,56 +11,21 @@
 
 <br>
 
-**AQ Game Reborn** adalah platform web aplikasi manajemen rental PlayStation modern berbasis **MERN Stack** yang dirancang untuk mengatasi berbagai masalah operasional di tempat rental konvensional. Aplikasi ini menyediakan sistem pemesanan online real-time, manajemen billing dinamis, verifikasi pembayaran QRIS, hingga dasbor kasir *walk-in* offline.
+**AQ Game Reborn** is a modern full-stack MERN web application designed to revolutionize PlayStation rental business operations. It replaces traditional manual logbooks with a seamless real-time booking platform, dynamic billing management, QRIS payment verification, and an offline walk-in POS cashier dashboard.
 
 ---
 
-## ✨ Fitur Utama (Core Features)
+## ✨ Core Features
 
-### 👤 1. Sisi Pengguna / Publik (User Dashboard)
-* **Live Slot Visualizer**: Cek ketersediaan jam secara real-time (Slot hijau = Kosong, Merah = Terisi).
-* **Dynamic Console Selection**: Filter unit console berdasarkan tipe (`PS5`, `PS4`, `PS3`) lengkap dengan informasi tarif billing per jam.
-* **Instant Booking & QRIS Payment**: Sistem pemesanan mandiri dengan simulasi pembayaran QRIS barkod dan upload bukti transfer.
-* **WhatsApp Auto-Chat**: Tombol konfirmasi otomatis langsung terhubung ke WhatsApp Admin.
-* **Riwayat & E-Receipt**: Pelanggan dapat memantau status pesanan (Pending, Paid, Confirmed) dan mencetak struk digital thermal.
+### 👤 1. Public & User Dashboard
+* **Live Slot Visualizer**: Check console availability in real-time (Green = Available, Red = Booked).
+* **Dynamic Console Selection**: Filter gaming units by type (`PS5`, `PS4`, `PS3`) with hourly rate transparency.
+* **Instant Booking & QRIS Payment**: Self-service reservation system with QRIS barcode payment simulation and receipt upload.
+* **WhatsApp Auto-Chat**: Direct integration for quick admin confirmation via WhatsApp.
+* **Booking History & E-Receipts**: Track order statuses (Pending, Paid, Confirmed, Cancelled) and print professional thermal receipts.
 
-### 🛡️ 2. Sisi Administrator & Kasir (Admin Dashboard)
-* **Financial Analytics & Omset**: Rekapitulasi pendapatan bersih harian/bulanan secara transparan.
-* **Dynamic Billing & Console Management**: Bebas menambah, mengubah, atau menghapus unit PS dan tarif billing per jam langsung dari basis data.
-* **Walk-In / Cashier POS**: Memungkinkan kasir toko fisik untuk menginput pelanggan yang datang langsung tanpa antre web, mengunci slot jam secara instan.
-* **User & Booking Control**: Manajemen akun pengguna (ubah role user/admin, hapus akun) serta edit/geser jadwal booking pelanggan yang fleksibel.
-* **Thermal Receipt Printing**: Cetak struk transaksi fisik/digital berstandar kasir siap printer thermal.
-
----
-
-## 🛠️ Tech Stack
-
-* **Frontend**: React.js, Vite, Tailwind CSS, Lucide Icons, Axios, React Router Dom.
-* **Backend**: Node.js, Express.js, RESTful API.
-* **Database**: MongoDB & Mongoose ODM.
-* **File Upload**: Multer (untuk penyimpanan bukti pembayaran).
-* **Authentication**: JSON Web Token (JWT) & bcryptjs.
-
----
-
-## 📂 Struktur Direktori Proyek
-
-```text
-aq-game-reborn/
-├── backend/
-│   ├── config/          # Konfigurasi koneksi Database MongoDB
-│   ├── controllers/     # Logika bisnis (Auth, Console, Booking, User)
-│   ├── middleware/      # Middleware Auth JWT & Upload Multer
-│   ├── models/          # Skema Database Mongoose (User, PSConsole, Booking)
-│   ├── routes/          # Endpoint API Router
-│   ├── uploads/         # Direktori penyimpanan bukti transfer
-│   └── server.js        # Titik masuk utama server Express
-│
-└── frontend/
-    ├── src/
-    │   ├── components/  # Komponen modular (Navbar, dll)
-    │   ├── pages/       # Halaman utama (Home, Login, Register, Admin, MyBookings)
-    │   ├── services/    # Konfigurasi Axios API interceptor
-    │   ├── App.jsx      # Konfigurasi Router Utama
-    │   └── main.css     # Styling Tailwind CSS
-    └── package.json
+### 🛡️ 2. Administrator & Cashier Dashboard
+* **Financial Analytics & Revenue**: Real-time net revenue tracking and earnings summary.
+* **Dynamic Billing & Console Control**: Seamlessly add, update, or remove PS units and hourly pricing rates directly from the database.
+* **Walk-In POS (Cashier Mode)**: Instantly log physical walk-in customers on the spot, locking time slots in real-time without scheduling conflicts.
+* **User
