@@ -8,7 +8,13 @@ const {
 } = require('../controllers/psController');
 const { protect, admin } = require('../middleware/authMiddleware');
 
-router.route('/').get(getConsoles).post(protect, admin, createConsole);
-router.route('/:id').put(protect, admin, updateConsole).delete(protect, admin, deleteConsole);
+// GET /api/consoles dapat diakses publik (tanpa protect)
+// POST /api/consoles hanya untuk Admin
+router.route('/')
+  .get(getConsoles) 
+  .post(protect, admin, createConsole);
+
+router.route('/:id')
+  .delete(protect, admin, deleteConsole);
 
 module.exports = router;
