@@ -1,52 +1,88 @@
+
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
 const connectDB = require('./config/db');
 
-// Import Routes
+dotenv.config();
+
 const authRoutes = require('./routes/authRoutes');
 const psRoutes = require('./routes/psRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-// Load env variables
-dotenv.config();
-
-// Connect Database
-connectDB();
-
 const app = express();
 
-// Middleware
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
+// Izinkan domain production dan preview untuk project frontend ini.
+const allowedOrigins = [
+  /^https:\/\/rental-ps-aq-game-reborn-[a-z0-9-]+\.vercel\.app$/,
+];
 
-// Tambahkan penanganan khusus preflight request OPTIONS agar lolos di Vercel
-app.options('*', cors());
+const corsOptions = {
+  origin(origin, callback) {
+    // Request tanpa Origin, misalnya pemeriksaan server-ke-server.
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    const allowed = allowedOrigins.some((pattern) =>
+      pattern.test(origin)
+    );
+
+    if (allowed) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`Origin tidak diizinkan oleh CORS: ${origin}`));
+  },
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: false,
+};
+
+app.use(cors(corsOptions));
+app.options(/.*/, cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve folder uploads sebagai static folder untuk akses gambar bukti pembayaran
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(
+  '/uploads',
+  express.static(path.join(__dirname, 'uploads'))
+);
 
-// API Routes
+// Pastikan database siap sebelum request API diproses.
+app.use('/api', async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error('MongoDB connection error:', error.message);
+
+    res.status(503).json({
+      message: 'Database tidak tersedia',
+    });
+  }
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/consoles', psRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/users', userRoutes);
 
-// Test Route Root
 app.get('/', (req, res) => {
-  res.send('API Rental PS AQ Game Reborn Berjalan...');
+  res.status(200).send('API Rental PS AQ Game Reborn berjalan.');
 });
 
-const PORT = process.env.PORT || 5000;
+// Ekspor Express untuk Vercel Serverless Functions.
+module.exports = app;
 
-app.listen(PORT, () => {
-  console.log(`Server berjalan di port ${PORT}`);
-});
+// Jalankan listener hanya saat dijalankan secara lokal.
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+
+  app.listen(PORT, () => {
+    console.log(`Server berjalan di port ${PORT}`);
+  });
+}
