@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://rental-ps-aq-game-reborn-hals08v6q-rudi-asman-salims-projects.vercel.app/api',
+  baseURL: 'https://rental-ps-aq-game-reborn-hals08v6q-rudi-asman-salims-projects.vercel.app/api',
 });
 
+// Interceptor untuk menyisipkan Token JWT otomatis
 API.interceptors.request.use((req) => {
   const userInfo = localStorage.getItem('userInfo');
   if (userInfo) {
