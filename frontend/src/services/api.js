@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://rental-ps-aq-game-reborn-hals08v6q-rudi-asman-salims-projects.vercel.app/api',
+  baseURL: 'https://rental-ps-aq-game-reborn.vercel.app/api',
 });
 
 // Interceptor untuk menyisipkan Token JWT otomatis
